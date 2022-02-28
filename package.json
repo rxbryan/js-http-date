@@ -1,0 +1,19 @@
+{
+  "name": "http-date",
+  "version": "0.0.1",
+  "description": "library for working with http date format",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "-"
+  },
+  "keywords": [
+    "http-date",
+    "date"
+  ],
+  "author": "Bryan Elee",
+  "license": "MIT"
+}
