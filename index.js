@@ -1,6 +1,7 @@
 /**
  * overrides only toString method
- * 
+ * only checks if string passed is a valid HTTP-date.
+ * doesn't check if date is meaningful
  */
 class HttpDate extends Date {
   /**
@@ -47,7 +48,7 @@ function asctime_parser() {
  * @param {Number} A value of 0 specifies Sunday; 1 specifies Monday;
  * 2 specifies Tuesday; 3 specifies Wednesday; 4 specifies Thursday; 
  * 5 specifies Friday; and 6 specifies Saturday
- * returns {string}|{NaN}
+ * returns {string}|{undefined}
  */
 function getDay(arg) {
   return (arg === 0) ? 'Sun' :
@@ -56,21 +57,34 @@ function getDay(arg) {
    (arg === 3) ? 'Wed' :
    (arg === 4) ? 'Thu' :
    (arg === 5) ? 'Fri' :
-   (arg === 6) ? 'Sat' : NaN
+   (arg === 6) ? 'Sat' : undefined
 }
 
 /**
  * @param {Number}|{String}
- * returns {string}|{Number}|{NaN}
+ * returns {string}|{Number}|{undefined} Returns -1 if arg is not in
+ * in the months array
  */
  function getMonth(arg) {
-   // body...
+
+  const months = [
+    'Jan', 'Feb', 'Mar', 'Apr', 
+    'May', 'Jun', 'Jul', 'Aug',
+    'Sep', 'Oct', 'Nov', 'Dec'
+  ]
+
+   return (typeof(arg) === 'number' && arg <= months.length) ? months[arg] :
+    (typeof(arg) === 'string') ? months.indexOf(arg) : undefined
  }
 
 /**
  * @param {Array}
+ * returns {Number} 
  */
-function toLocalTime(arr) {
+function GMT_toLocalTimeConstructor(arr) {
+  let timezoneOffset = new Date().getTimezoneOffset()
+  let localTime = new Date(...arr).getTime() - TimezoneOffset
+  return localTime 
 
 }
 
