@@ -44,16 +44,28 @@ function asctime_parser() {
 }
 
 /**
- * @param {Number}|{String}
+ * @param {Number} A value of 0 specifies Sunday; 1 specifies Monday;
+ * 2 specifies Tuesday; 3 specifies Wednesday; 4 specifies Thursday; 
+ * 5 specifies Friday; and 6 specifies Saturday
+ * returns {string}|{NaN}
  */
 function getDay(arg) {
-
+  return (arg === 0) ? 'Sun' :
+   (arg === 1) ? 'Mon' :
+   (arg === 2) ? 'Tue' :
+   (arg === 3) ? 'Wed' :
+   (arg === 4) ? 'Thu' :
+   (arg === 5) ? 'Fri' :
+   (arg === 6) ? 'Sat' : NaN
 }
 
 /**
  * @param {Number}|{String}
- * 
+ * returns {string}|{Number}|{NaN}
  */
+ function getMonth(arg) {
+   // body...
+ }
 
 /**
  * @param {Array}
