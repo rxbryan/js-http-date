@@ -79,14 +79,13 @@ function getDay(arg) {
 
 /**
  * @param {Array}
- * returns {Number} 
+ * returns {Number} local time in unix time 
  */
-function GMT_toLocalTimeConstructor(arr) {
-  let timezoneOffset = new Date().getTimezoneOffset()
-  let localTime = new Date(...arr).getTime() - TimezoneOffset
+function GMT_toLocalTimeConstructor(obj) {
+  let timezoneOffset = obj.getTimezoneOffset()
+  let localTime = obj.getTime() - TimezoneOffset
   return localTime 
-
 }
 
-function localTime_GMT ()
+
 function genpreferred ()
