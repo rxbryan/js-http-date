@@ -9,18 +9,28 @@ const ASCTIME_REGEX =
   /^\w{3} \w{3} (\d{2}|\d{1}) \d{2}:\d{2}:\d{2} \d{4}$/
 
 /**
- * overrides only toString method
- * only checks if string passed is a valid HTTP-date.
- * doesn't check if date is meaningful
+ * overrides the toString method
+ * constructor only checks if string passed to
+ * it is a valid HTTP-date.
  */
 class HttpDate extends Date {
   /**
    * @param {object}|{number}|{string}
    */
   constructor(date) {
+    let dateArgs
+    if (isIMFfixdate(date))
+      dateArgs = IMF_fixdate_parser(date)
+    else if (isRFC850date(date))
+      dateArgs = rfc850_parser(date)
+    else if (isAsctime(date))
+      dateArgs = asctime_parser(date)
+    else
+      throw new TypeError('HttpDate constructor argument is not a valid date')
+    
+    super(...dateArgs)
 
-    super()
-
+    this.setTime(GMT_toLocalTimeConstructor(this))
   }
 
   /**
@@ -28,16 +38,36 @@ class HttpDate extends Date {
    * timezone = GMT
    */
   toString() {
+    let timeString = [
+      `${this.getUTCHours().toString().length === 1 ? '0' + this.getUTCHours() :
+      this.getUTCHours()}`,
+      `${this.getUTCMinutes().toString().length === 1 ? '0' + this.getUTCMinutes() :
+      this.getUTCMinutes()}`,
+      `${this.getUTCSeconds().toString().length === 1 ? '0' + this.getUTCSeconds() :
+      this.getUTCSeconds()}`
+    ].join(':')
+    let dateString = [
+      `${this.getUTCDate().toString().length === 1 ? '0' + this.getUTCDate() :
+      this.getUTCDate()} `+
+      `${getMonth(this.getUTCMonth())} ` +
+      `${this.getUTCFullYear()}`
+    ].join(' ')
 
+    return [
+    getDay(this.getUTCDay()) + ',',
+    dateString,
+    timeString,
+    'GMT'
+    ].join(' ')
   }
 
 }
 
-HttpDate.isvalid = function isValid(arg) {
+HttpDate.isValid = function isValid(arg) {
   return isValid_IMF_fixdate(arg) ||
     isValid_asctime(arg) ||
-    isValid__rfc850(arg) ||
-    !isNaN(Date.parse(arg))
+    isValid__rfc850(arg) //||
+    //!isNaN(Date.parse(arg))
 }
 
 HttpDate.isIMFfixdate = function isValid_IMF_fixdate(arg) {
@@ -60,16 +90,12 @@ function IMF_fixdate_parser(date) {
   let dateArgs = date.slice(5,25).split(' ')
   let timeArgs = dateArgs[3].split(':')
 
-  let __dateArgs = []
-  __dateArgs.push(
+  return [
     dateArgs[2],
     getMonth(dateArgs[1]),
     dateArgs[0],
-    timeArgs[0],
-    timeArgs[1],
-    timeArgs[2]
-  )
-  return __dateArgs
+    ...timeArgs
+  ]
 }
 
 /**
