@@ -1,3 +1,13 @@
+
+module.exports = HttpDate
+
+const PREFERRED_FORMAT_REGEX = 
+  /^[A-Z]{1}\w{2}, \d{2} [A-Z]{1}\w{2} \d{4} \d{2}:\d{2}:\d{2} GMT$/
+const RFC850_FORMAT_REGEX = 
+  /^[A-Z]{1}\w{5,8}, \d{2}-\w{3}-\d{2} \d{2}:\d{2}:\d{2} (GMT|Gmt|gmt)$/
+const ASCTIME_REGEX = 
+  /^\w{3} \w{3} (\d{2}|\d{1}) \d{2}:\d{2}:\d{2} \d{4}$/
+
 /**
  * overrides only toString method
  * only checks if string passed is a valid HTTP-date.
@@ -44,9 +54,6 @@ HttpDate.isRFC850date = function isValid__rfc850() {
  * returns {Array}
  */
 function IMF_fixdate_parser(date) {
-  const PREFERRED_FORMAT_REGEX = 
-    /^[A-Z]{1}\w{2}, \d{2} [A-Z]{1}\w{2} \d{4} \d{2}:\d{2}:\d{2} GMT$/
-
   let dateArgs = date.slice(5,25).split(' ')
   let timeArgs = dateArgs[3].split(':')
 
@@ -67,9 +74,6 @@ function IMF_fixdate_parser(date) {
  * returns {Array}
  */
 function rfc850_parser(date) {
-  const RFC850_FORMAT_REGEX = 
-    /^[A-Z]{1}\w{5,8}, \d{2}-\w{3}-\d{2} \d{2}:\d{2}:\d{2} (GMT|Gmt|gmt)$/
-
   let args = date.slice(8,-4).split(' ')
   let dateArgs = args[0].split('-')
   let timeArgs = args[1].split(':')
@@ -87,8 +91,6 @@ function rfc850_parser(date) {
  * returns {Array}
  */
 function asctime_parser(date) {
-  const ASCTIME_REGEX = /^\w{3} \w{3} (\d{2}|\d{1}) \d{2}:\d{2}:\d{2} \d{4}$/
-
   let args = date.slice(4).split(' ')
   let timeArgs = args[2].split(':')
 
@@ -122,7 +124,6 @@ function getDay(arg) {
  * in the months array
  */
  function getMonth(arg) {
-
   const months = [
     'Jan', 'Feb', 'Mar', 'Apr', 
     'May', 'Jun', 'Jul', 'Aug',
