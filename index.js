@@ -35,6 +35,20 @@ function isValid__rfc850
 function IMF_fixdate_parser(date) {
   const PREFERRED_FORMAT_REGEX = 
     /^[A-Z]{1}\w{2}, \d{2} [A-Z]{1}\w{2} \d{4} \d{2}:\d{2}:\d{2} GMT$/
+
+    dateArgs = date.slice(5,25).split(' ')
+    timeArgs = dateArgs[3].split(':')
+
+    let __dateArgs = []
+    __dateArgs.push(
+      dateArgs[2],
+      getMonth(dateArgs[1]),
+      dateArgs[0],
+      timeArgs[0],
+      timeArgs[1],
+      timeArgs[2]
+      )
+    return __dateArgs
 }
 function rfc850_parser() {
   const RFC850_FORMAT_REGEX = 
