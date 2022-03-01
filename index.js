@@ -1,11 +1,11 @@
 
 module.exports = HttpDate
 
-const PREFERRED_FORMAT_REGEX = 
+const PREFERRED_FORMAT_REGEX =
   /^[A-Z]{1}\w{2}, \d{2} [A-Z]{1}\w{2} \d{4} \d{2}:\d{2}:\d{2} GMT$/
-const RFC850_FORMAT_REGEX = 
+const RFC850_FORMAT_REGEX =
   /^[A-Z]{1}\w{5,8}, \d{2}-\w{3}-\d{2} \d{2}:\d{2}:\d{2} (GMT|Gmt|gmt)$/
-const ASCTIME_REGEX = 
+const ASCTIME_REGEX =
   /^\w{3} \w{3} (\d{2}|\d{1}) \d{2}:\d{2}:\d{2} \d{4}$/
 
 /**
@@ -33,20 +33,23 @@ class HttpDate extends Date {
 
 }
 
-HttpDate.isvalid = function isValid(argument) {
-  // body...
+HttpDate.isvalid = function isValid(arg) {
+  return isValid_IMF_fixdate(arg) ||
+    isValid_asctime(arg) ||
+    isValid__rfc850(arg) ||
+    !isNaN(Date.parse(arg))
 }
 
-HttpDate.isIMFfixdate = function isValid_IMF_fixdate() {
-
+HttpDate.isIMFfixdate = function isValid_IMF_fixdate(arg) {
+  return PREFERRED_FORMAT_REGEX.test(arg)
 }
 
-HttpDate.isAsctime =  function isValid_asctime() {
-
+HttpDate.isAsctime =  function isValid_asctime(arg) {
+  return ASCTIME_REGEX.test(arg)
 }
 
-HttpDate.isRFC850date = function isValid__rfc850() {
-
+HttpDate.isRFC850date = function isValid__rfc850(arg) {
+  return RFC850_FORMAT_REGEX.test(arg)
 }
 
 /**
@@ -125,7 +128,7 @@ function getDay(arg) {
  */
  function getMonth(arg) {
   const months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 
+    'Jan', 'Feb', 'Mar', 'Apr',
     'May', 'Jun', 'Jul', 'Aug',
     'Sep', 'Oct', 'Nov', 'Dec'
   ]
@@ -136,13 +139,10 @@ function getDay(arg) {
 
 /**
  * @param {Array}
- * returns {Number} local time in unix time 
+ * returns {Number} local time in unix time
  */
 function GMT_toLocalTimeConstructor(obj) {
   let timezoneOffset = obj.getTimezoneOffset()
   let localTime = obj.getTime() - TimezoneOffset
-  return localTime 
+  return localTime
 }
-
-
-function genpreferred ()
