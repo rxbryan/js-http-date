@@ -70,9 +70,26 @@ function rfc850_parser(date) {
   const RFC850_FORMAT_REGEX = 
     /^[A-Z]{1}\w{5,8}, \d{2}-\w{3}-\d{2} \d{2}:\d{2}:\d{2} (GMT|Gmt|gmt)$/
 
+  let args = date.slice(8,-4).split(' ')
+  let dateArgs = args[0].split('-')
+  let timeArgs = args[1].split(':')
+
+  return [
+  dateArgs[2],
+  getMonth(dateArgs[1]),
+  dateArgs[0],
+  ...timeArgs
+  ]
 }
-function asctime_parser() {
+
+/**
+ *@param {String}
+ * returns {Array}
+ */
+function asctime_parser(date) {
   const ASCTIME_REGEX = /^\w{3} \w{3} (\d{2}|\d{1}) \d{2}:\d{2}:\d{2} \d{4}$/
+
+
 }
 
 /**
