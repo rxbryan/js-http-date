@@ -23,36 +23,53 @@ class HttpDate extends Date {
 
 }
 
-HttpDate.isvalid()
+HttpDate.isvalid = function isValid(argument) {
+  // body...
+}
 
-function isValid_IMF_fixdate() 
-function isValid_asctime()
-function isValid__rfc850
+HttpDate.isIMFfixdate = function isValid_IMF_fixdate() {
+
+}
+
+HttpDate.isAsctime =  function isValid_asctime() {
+
+}
+
+HttpDate.isRFC850date = function isValid__rfc850() {
+
+}
 
 /**
- *@param {String} 
+ *@param {String}
+ * returns {Array}
  */
 function IMF_fixdate_parser(date) {
   const PREFERRED_FORMAT_REGEX = 
     /^[A-Z]{1}\w{2}, \d{2} [A-Z]{1}\w{2} \d{4} \d{2}:\d{2}:\d{2} GMT$/
 
-    dateArgs = date.slice(5,25).split(' ')
-    timeArgs = dateArgs[3].split(':')
+  let dateArgs = date.slice(5,25).split(' ')
+  let timeArgs = dateArgs[3].split(':')
 
-    let __dateArgs = []
-    __dateArgs.push(
-      dateArgs[2],
-      getMonth(dateArgs[1]),
-      dateArgs[0],
-      timeArgs[0],
-      timeArgs[1],
-      timeArgs[2]
-      )
-    return __dateArgs
+  let __dateArgs = []
+  __dateArgs.push(
+    dateArgs[2],
+    getMonth(dateArgs[1]),
+    dateArgs[0],
+    timeArgs[0],
+    timeArgs[1],
+    timeArgs[2]
+  )
+  return __dateArgs
 }
-function rfc850_parser() {
+
+/**
+ *@param {String}
+ * returns {Array}
+ */
+function rfc850_parser(date) {
   const RFC850_FORMAT_REGEX = 
     /^[A-Z]{1}\w{5,8}, \d{2}-\w{3}-\d{2} \d{2}:\d{2}:\d{2} (GMT|Gmt|gmt)$/
+
 }
 function asctime_parser() {
   const ASCTIME_REGEX = /^\w{3} \w{3} (\d{2}|\d{1}) \d{2}:\d{2}:\d{2} \d{4}$/
