@@ -89,7 +89,15 @@ function rfc850_parser(date) {
 function asctime_parser(date) {
   const ASCTIME_REGEX = /^\w{3} \w{3} (\d{2}|\d{1}) \d{2}:\d{2}:\d{2} \d{4}$/
 
+  let args = date.slice(4).split(' ')
+  let timeArgs = args[2].split(':')
 
+  return [
+    args[3],
+    getMonth(args[0]),
+    args[1],
+    ...timeArgs
+  ]
 }
 
 /**
