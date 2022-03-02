@@ -29,18 +29,20 @@ class HttpDate extends Date {
         dateArgs = asctime_parser(args[0])
       else
         throw new TypeError('HttpDate constructor argument is not a valid date')
-    } else if (args.length === 1 && typeof (args[0]) === 'number') {
-      dateArgs = args
-    } else if (args.length > 1) {
-      dateArgs = args
-    } else {
+    } else if ((args.length === 1 && typeof (args[0]) !== 'number') ||
+        !(args.length >= 2 && args.length <= 7)) {
       throw new TypeError('HttpDate constructor argument is not a valid date')
+    } else {
+      dateArgs = args
     }
 
     if (dateArgs.length > 0)
       super(...dateArgs)
     else
       super()
+    if (isNaN(this.getTime())) {
+      throw new TypeError('Invalid Date')
+    }
 
     this.setTime(GMT_toLocalTimeConstructor(this))
   }
