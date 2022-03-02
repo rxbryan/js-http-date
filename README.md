@@ -21,7 +21,8 @@ $ npm install http-date
 Accepts every valid `Date` constructor argument. Overrides the `toString` method of the 
 `Date` class, such that a call to the toString returns the preferred HTTP-date format
 (as defined in RFC 7231).
-The original behaviour can be obtained by passing an object 
+The original behaviour can be obtained by calling `toString` with `{format: 'standard'}` as
+arguments 
 ```js
 console.log(new httpDate.toString({format: 'standard'}))
 ```
