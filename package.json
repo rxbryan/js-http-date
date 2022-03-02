@@ -1,6 +1,6 @@
 {
   "name": "http-date",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "description": "library for working with http date format",
   "main": "index.js",
   "scripts": {
