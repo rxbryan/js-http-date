@@ -17,18 +17,30 @@ class HttpDate extends Date {
   /**
    * @param {object}|{number}|{string}
    */
-  constructor(date) {
+  constructor(...args) {
     let dateArgs
-    if (isIMFfixdate(date))
-      dateArgs = IMF_fixdate_parser(date)
-    else if (isRFC850date(date))
-      dateArgs = rfc850_parser(date)
-    else if (isAsctime(date))
-      dateArgs = asctime_parser(date)
-    else
+
+    if (args.length === 1 && typeof (args[0]) === 'string') {
+      if (isIMFfixdate(args[0]))
+        dateArgs = IMF_fixdate_parser(args[0])
+      else if (isRFC850date(args[0]))
+        dateArgs = rfc850_parser(args[0])
+      else if (isAsctime(args[0]))
+        dateArgs = asctime_parser(args[0])
+      else
+        throw new TypeError('HttpDate constructor argument is not a valid date')
+    } else if (args.length === 1 && typeof (args[0]) === 'number') {
+      dateArgs = args
+    } else if (args.length > 1) {
+      dateArgs = args
+    } else {
       throw new TypeError('HttpDate constructor argument is not a valid date')
-    
-    super(...dateArgs)
+    }
+
+    if (dateArgs.length > 0)
+      super(...dateArgs)
+    else
+      super()
 
     this.setTime(GMT_toLocalTimeConstructor(this))
   }
@@ -38,18 +50,19 @@ class HttpDate extends Date {
    * timezone = GMT
    */
   toString() {
+    let hrs = this.getUTCHours(),
+      mins = this.getUTCMinutes(),
+      secs = this.getUTCSeconds(),
+      date = this.getUTCDate()
+
     let timeString = [
-      `${this.getUTCHours().toString().length === 1 ? '0' + this.getUTCHours() :
-      this.getUTCHours()}`,
-      `${this.getUTCMinutes().toString().length === 1 ? '0' + this.getUTCMinutes() :
-      this.getUTCMinutes()}`,
-      `${this.getUTCSeconds().toString().length === 1 ? '0' + this.getUTCSeconds() :
-      this.getUTCSeconds()}`
+      `${hrs.toString().length === 1 ? '0' + hrs : hrs}`,
+      `${mins.toString().length === 1 ? '0' + mins : mins}`,
+      `${secs.toString().length === 1 ? '0' + secs : secs}`
     ].join(':')
     let dateString = [
-      `${this.getUTCDate().toString().length === 1 ? '0' + this.getUTCDate() :
-      this.getUTCDate()} `+
-      `${getMonth(this.getUTCMonth())} ` +
+      `${date.toString().length === 1 ? '0' + date : date}`,
+      `${getMonth(this.getUTCMonth())}`,
       `${this.getUTCFullYear()}`
     ].join(' ')
 
@@ -66,8 +79,7 @@ class HttpDate extends Date {
 HttpDate.isValid = function isValid(arg) {
   return isValid_IMF_fixdate(arg) ||
     isValid_asctime(arg) ||
-    isValid__rfc850(arg) //||
-    //!isNaN(Date.parse(arg))
+    isValid__rfc850(arg)
 }
 
 HttpDate.isIMFfixdate = function isValid_IMF_fixdate(arg) {
