@@ -61,3 +61,4 @@ res.set('Last-modified', lastModified.toString())
 
 
 [npm-url]: https://www.npmjs.com/package/http-date
+[npm-image]: https://img.shields.io/badge/npm-v6.14-blue
