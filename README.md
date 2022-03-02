@@ -60,4 +60,4 @@ res.set('Last-modified', lastModified.toString())
 [Bryan Elee](https://github.com/rxbryan) ([rxbryn@gmail.com](mailto:rxbryn@gmail.com))
 
 
-[npm-url]: ""
+[npm-url]: https://www.npmjs.com/package/http-date
