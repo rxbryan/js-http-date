@@ -4,16 +4,31 @@
   "description": "library for working with http date format",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "-"
+    "url": "https://github.com/rxbryan/js-http-date.git"
   },
   "keywords": [
     "http-date",
     "date"
   ],
+  "engines":{
+    "node": ">= 14.17.5"
+  },
+  "files": [
+    "index.js",
+    "HISTORY.md",
+    "README.md"
+  ],
+  "homepage":"https://github.com/rxbryan/js-http-date#readme",
+  "bugs":{
+    "url":""
+  },
   "author": "Bryan Elee",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
 }
