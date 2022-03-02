@@ -92,7 +92,6 @@ function IMF_fixdate_parser(date) {
   let dateArgs = date.slice(5,25).split(' ')
   let timeArgs = dateArgs[3].split(':')
   let month = getMonth(dateArgs[1])
-  console.log(month)
   if (!month)
     throw new TypeError(`${month} is an invalid month`)
   return [
@@ -162,7 +161,7 @@ return days[arg]
     'May', 'Jun', 'Jul', 'Aug',
     'Sep', 'Oct', 'Nov', 'Dec'
   ]
-  console.log(arg)
+
   return (typeof(arg) === 'number' && arg <= months.length) ? months[arg] :
     (typeof(arg) === 'string' && months.indexOf(arg) !== -1) ? months.indexOf(arg) : undefined
  }
