@@ -1,3 +1,62 @@
 # http-date
-Implements utilties for converting to and from HTTP-date format 
-- takes a `HTTP-date` string or unix time in miliseconds
+
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Node.js Version][node-version-image]][node-version-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
+
+This module extends the JavaScript `Date` to accept valid HTTP-date 
+formats (as defined in RFC 7231) as constructor initializers and generate 
+valid IMF_fixdate HTTP-date string format for use in HTTP date header fields.
+
+## Installation
+
+This is a [Node.js](https://nodejs.org/en/) module available through the
+[npm registry](https://www.npmjs.com/). Installation is done using the
+[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+
+```sh
+$ npm install http-date
+```
+Accepts every valid `Date` constructor argument. Overrides the `toString` method of the 
+`Date` class, such that a call to the toString returns the preferred HTTP-date format
+(as defined in RFC 7231).
+The original behaviour can be obtained by passing an object 
+```js
+console.log(new httpDate.toString({format: 'standard'}))
+```
+
+## Usage
+
+```js
+var HttpDate = require('http-date')
+
+httpDate = new HttpDate('Sun, 06 Nov 1994 08:49:37 GMT')
+```
+Using express
+
+```js
+var HttpDate = require('http-date')
+var Stats = require('fs').Stats
+
+lastModified = new HttpDate(req.get('if-modified-since'))
+
+if (lastmodified.getTime() < stat.mtime.getTime())
+  res.sendFile(file)
+```
+
+```js
+lastModified = new HttpDate()
+res.set('Last-modified', lastModified.toString())
+```
+
+## License
+
+[MIT License](http://www.opensource.org/licenses/mit-license.php)
+
+## Author
+
+[Bryan Elee](https://github.com/rxbryan) ([rxbryn@gmail.com](mailto:rxbryn@gmail.com))
+
+
+[npm-url]: ""
