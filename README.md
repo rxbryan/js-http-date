@@ -2,7 +2,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![codecov](https://codecov.io/gh/rxbryan/js-http-date/branch/main/graph/badge.svg?token=KH56ZAA0WL)](https://codecov.io/gh/rxbryan/js-http-date)
-[![HTTP-DATE][http-date-image]][htt-date-url]
+[![HTTP-DATE][http-date-image]](https://github.com/rxbryan/js-http-date#readme)
 
 This module extends the JavaScript `Date` to accept valid HTTP-date 
 formats (as defined in RFC 7231) as constructor initializers and generate 
