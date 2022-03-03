@@ -2,7 +2,7 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![codecov](https://codecov.io/gh/rxbryan/js-http-date/branch/main/graph/badge.svg?token=KH56ZAA0WL)](https://codecov.io/gh/rxbryan/js-http-date)
-[![HTTP-DATE][http-date-image]]
+[![HTTP-DATE][http-date-image]][htt-date-url]
 
 This module extends the JavaScript `Date` to accept valid HTTP-date 
 formats (as defined in RFC 7231) as constructor initializers and generate 
@@ -61,4 +61,5 @@ res.set('Last-modified', lastModified.toString())
 
 [npm-url]: https://www.npmjs.com/package/http-date
 [npm-image]: https://img.shields.io/badge/npm-v6.14-blue
-[http-date-image]: https://img.shields.io/badge/http-date-success
+[http-date-image]: https://img.shields.io/badge/http--date-v1.0.0-success
+[http-date-url]: https://github.com/rxbryan/js-http-date#readme
