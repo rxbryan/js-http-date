@@ -61,5 +61,5 @@ res.set('Last-modified', lastModified.toString())
 
 [npm-url]: https://www.npmjs.com/package/http-date
 [npm-image]: https://img.shields.io/badge/npm-v6.14-blue
-[http-date-image]: https://img.shields.io/badge/http--date-v1.0.0-success
+[http-date-image]: https://img.shields.io/badge/http--date-v1.0.7-success
 [http-date-url]: https://github.com/rxbryan/js-http-date#readme

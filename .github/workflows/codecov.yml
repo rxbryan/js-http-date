@@ -1,4 +1,4 @@
-name: Running Code Coverage
+name: http-date Code Coverage
 
 on: [push, pull_request]
 
@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 13.x, 14.x, 15.x]
+        node-version: [10.x, 12.x, 13.x, 14.x, 15.x, 16.x, 17.x]
 
     steps:
     - name: Checkout repository
