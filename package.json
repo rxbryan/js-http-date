@@ -1,6 +1,6 @@
 {
   "name": "http-date",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "library for working with http date format",
   "main": "index.js",
   "scripts": {
@@ -14,21 +14,23 @@
     "http-date",
     "date"
   ],
-  "engines":{
+  "engines": {
     "node": ">= 12"
   },
   "files": [
     "index.js",
     "HISTORY.md",
-    "README.md"
+    "README.md",
+    "License"
   ],
-  "homepage":"https://github.com/rxbryan/js-http-date#readme",
-  "bugs":{
-    "url":""
+  "homepage": "https://github.com/rxbryan/js-http-date#readme",
+  "bugs": {
+    "url": ""
   },
   "author": "Bryan Elee",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^8.11.0",
     "jest": "^27.5.1"
   }
 }
